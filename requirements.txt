@@ -1,0 +1,49 @@
+# Core ML / DL
+tensorflow
+numpy
+pandas
+matplotlib
+scikit-learn
+scikit-image
+
+# Computer Vision
+opencv-python
+
+# Image handling
+Pillow
+
+# API & Backend
+fastapi
+uvicorn[standard]
+
+# Async DB (PostgreSQL)
+asyncpg
+psycopg2-binary
+
+# ORM / migrations
+SQLAlchemy
+alembic
+
+# Auth & security
+bcrypt
+PyJWT
+python-jose
+
+# Redis (async)
+aioredis
+
+# Validation & settings
+pydantic
+pydantic-settings
+
+# Environment variables
+python-dotenv
+
+# File uploads / forms
+python-multipart
+
+# HTTP client
+httpx
+
+# Utilities
+tqdm
