@@ -31,6 +31,7 @@ python-jose
 
 # Redis (async)
 aioredis
+redis
 
 # Validation & settings
 pydantic
