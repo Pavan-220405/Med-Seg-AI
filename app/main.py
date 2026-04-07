@@ -9,6 +9,7 @@ from app.db.engine import init_db_pool, close_db_pool
 from app.db.redis_engine import init_redis, close_redis
 from app.users.routes import auth_router
 from app.ML_models.Brain_Tumor_Segmentation.utils import init_model, close_model, get_model
+from app.ML_models.Brain_Tumor_Segmentation.routes import segmentation_router
 
 
 @asynccontextmanager
@@ -45,3 +46,4 @@ async def root():
 
 # Include Routers
 app.include_router(auth_router,prefix=f"/api/{version}/users", tags=["Users"])
+app.include_router(segmentation_router, prefix=f"/api/{version}/segmentation", tags=["Segmentation"])
