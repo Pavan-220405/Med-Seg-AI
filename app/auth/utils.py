@@ -35,9 +35,9 @@ def create_access_token(user_details : UserToken, expiry_time : timedelta = None
     "Function to get access tokens"
 
     now = datetime.now(timezone.utc)
-    expiry = now + (expiry_time if expiry_time else timedelta(minutes=settings.ACCESS_TOKEN_EXPIRY))
+    expiry = now + (expiry_time if expiry_time else timedelta(minutes=settings.ACCESS_TOKEN_EXPIRY_MINUTES))
     payload = {
-        "id" : str(user_details.user_id),
+        "id" : str(user_details.id),
         "role" : user_details.role,
         "iat": int(now.timestamp()),
         "exp" : int(expiry.timestamp()),
@@ -54,9 +54,9 @@ def create_refresh_token(user_details : UserToken, expiry_time : timedelta = Non
     "Function to get Refresh tokens" 
 
     now = datetime.now(timezone.utc)
-    expiry = now + (expiry_time if expiry_time else timedelta(days=settings.REFRESH_TOKEN_EXPIRY))
+    expiry = now + (expiry_time if expiry_time else timedelta(days=settings.REFRESH_TOKEN_EXPIRY_DAYS))
     payload = {
-        "id" : str(user_details.user_id),
+        "id" : str(user_details.id),
         "role" : user_details.role,
         "exp" : int(expiry.timestamp()),
         "iat": int(now.timestamp()),

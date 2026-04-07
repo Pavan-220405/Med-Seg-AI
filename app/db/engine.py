@@ -25,7 +25,7 @@ async def init_db_pool():
 # -------------------------
 # Get Pool
 # -------------------------
-async def get_pool():
+def get_pool():
     "Get the initialized database connection pool"
 
     if _pool is None:

@@ -38,6 +38,7 @@ access_token_bearer = AccessTokenBearer()
 
 
 
+
 # -----------------------------
 # Refresh Token Bearer
 # -----------------------------
@@ -66,6 +67,7 @@ refresh_token_bearer = RefreshTokenBearer()
 async def get_curr_user(token_details : dict = Depends(access_token_bearer), conn : Connection = Depends(get_conn)):
     
     return await crud_get_user_by_id(conn=conn, id=token_details["id"])
+
 
 
 # ----------------------------

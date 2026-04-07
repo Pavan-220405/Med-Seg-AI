@@ -47,6 +47,7 @@ async def close_redis():
 # Add JTI to Blocklist
 # -----------------------------
 async def add_jti_to_blocklist(jti: str):
+    redis_client = get_redis()
     await redis_client.set(jti, "revoked", ex=settings.JTI_EXPIRY)
 
 
