@@ -1,3 +1,6 @@
+import os
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 
@@ -5,6 +8,7 @@ from contextlib import asynccontextmanager
 from app.db.engine import init_db_pool, close_db_pool
 from app.db.redis_engine import init_redis, close_redis
 from app.users.routes import auth_router
+from app.ML_models.Brain_Tumor_Segmentation.utils import init_model, close_model, get_model
 
 
 @asynccontextmanager
@@ -13,11 +17,14 @@ async def lifespan(app: FastAPI):
     # Startup code
     await init_db_pool()
     await init_redis()
+    init_model()
 
-    yield
+    model = get_model()
+    yield   
     
     # Shutdown code
     print("Shutting down...")
+    close_model()
     await close_db_pool()
     await close_redis()
 

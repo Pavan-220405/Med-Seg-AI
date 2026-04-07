@@ -51,3 +51,8 @@ htmlcov/
 *.pth
 *.ckpt
 *.pkl
+
+
+
+# other files
+app/ML_models/Brain_Tumor_Segmentation/archive
