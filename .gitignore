@@ -42,7 +42,8 @@ htmlcov/
 
 # Jupyter Notebooks
 .ipynb_checkpoints/
-*.ipynb
+*.keras
+*.h5
 
 # Model weights / large files
 *.h5
