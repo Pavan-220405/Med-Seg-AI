@@ -23,13 +23,15 @@ def upgrade() -> None:
     op.execute("""
                 CREATE TABLE models(
                     id UUID PRIMARY KEY DEFAULT gen_random_uuid(), 
-                    model_name TEXT UNIQUE NOT NULL,
+                    model_name TEXT NOT NULL,
                     version TEXT NOT NULL,
                     description TEXT,
-                    frameword TEXT NOT NULL,
+                    framework TEXT NOT NULL,
                     model_type TEXT NOT NULL,
                     model_path TEXT NOT NULL,
-                    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
+                    created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+               
+                    UNIQUE(model_name, version)
                 );
             """)
 
