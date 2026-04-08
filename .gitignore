@@ -57,3 +57,6 @@ htmlcov/
 # other files
 app/ML_models/Brain_Tumor_Segmentation/archive
 segmentation_storage/
+segmentation_storage/*
+segmentation_testing.py
+utils.py

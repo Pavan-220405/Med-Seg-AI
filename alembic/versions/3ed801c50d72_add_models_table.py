@@ -30,6 +30,7 @@ def upgrade() -> None:
                     model_type TEXT NOT NULL,
                     model_path TEXT NOT NULL,
                     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
+                    added_by UUID REFERENCES users(id) ON DELETE SET NULL,
                
                     UNIQUE(model_name, version)
                 );

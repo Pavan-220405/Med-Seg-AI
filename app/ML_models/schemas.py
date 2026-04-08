@@ -1,0 +1,23 @@
+from pydantic import BaseModel, Field
+from typing import Optional
+from uuid import UUID
+from datetime import datetime
+
+
+class ModelBase(BaseModel):
+    model_name: str = Field(..., example="unet_brain_seg")
+    version: str = Field(..., example="v1")
+    description: Optional[str] = Field(None, example="UNet trained on BraTS dataset")
+    framework: str = Field(..., example="pytorch")
+    model_type: str = Field(..., example="segmentation")
+    model_path: str = Field(..., example="models/unet_v1.pth")
+
+class ModelCreate(ModelBase):
+    added_by : UUID = Field(..., example="123e4567-e89b-12d3-a456-426614174000")
+
+
+class ModelResponse(ModelBase):
+    id : UUID
+    created_at : datetime
+    added_by : UUID
+
