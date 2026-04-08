@@ -1,8 +1,8 @@
 """Add users table
 
-Revision ID: 25c922d4ff0e
+Revision ID: f9498661b34b
 Revises: 
-Create Date: 2026-04-06 22:32:11.532769
+Create Date: 2026-04-08 18:06:49.347523
 
 """
 from typing import Sequence, Union
@@ -12,14 +12,13 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '25c922d4ff0e'
-down_revision: Union[str, Sequence[str], None] = None
+revision: str = 'f9498661b34b'
+down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
-    """Upgrade schema."""
     op.execute('CREATE EXTENSION IF NOT EXISTS "pgcrypto";')
     op.execute("""
                 CREATE TABLE users(
@@ -29,12 +28,11 @@ def upgrade() -> None:
                 last_name TEXT NOT NULL,
                 email TEXT UNIQUE NOT NULL,
                 hashed_password TEXT NOT NULL,
-                role TEXT DEFAULT 'user' CHECK (role IN ('user', 'radiologist', 'admin')),
+                role TEXT DEFAULT 'user' CHECK (role IN ('user', 'radiologist', 'admin','expert')),
                 joined_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP
             );
 """)
 
 
 def downgrade() -> None:
-    """Downgrade schema."""
-    op.execute("DROP TABLE users;")
+    op.execute('DROP TABLE users;')

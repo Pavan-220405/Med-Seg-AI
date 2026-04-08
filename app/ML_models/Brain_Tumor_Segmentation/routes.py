@@ -17,7 +17,7 @@ segmentation_router = APIRouter()
 
 
 # Storage dependencies
-BASE_DIR = Path("storage")
+BASE_DIR = Path("segmentation_storage")
 INPUT_DIR = BASE_DIR / "input"
 MASK_DIR = BASE_DIR / "mask"
 
@@ -26,7 +26,7 @@ MASK_DIR.mkdir(parents=True, exist_ok=True)
 
 
 
-@segmentation_router.post("/predict")
+@segmentation_router.post("/predict",description="Upload an image for brain tumor segmentation. Supported formats: .tif, .tiff, .png")
 async def upload_file(file: UploadFile = File(...)):
     prediction_id_db = uuid.uuid4()
     prediction_id = str(prediction_id_db)
