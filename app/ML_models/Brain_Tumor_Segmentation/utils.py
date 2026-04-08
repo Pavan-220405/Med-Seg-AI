@@ -17,7 +17,7 @@ def init_model() -> None:
         model_path,
         compile=False
     )
-    print("✅ Brain-Tumor Segmentation model loaded successfully.")
+    print("Brain-Tumor Segmentation model loaded successfully.")
 
 
 def get_model() -> keras.Model:
@@ -31,7 +31,7 @@ def close_model() -> None:
     if model is not None:
         del model
         model = None
-        print("🛑 Model unloaded.")
+        print("Model unloaded.")
 
 
 

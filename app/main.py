@@ -40,7 +40,7 @@ app = FastAPI(
 )
 
 
-@app.get("/")
+@app.get("/",tags=["Root"])
 async def root():
     return {"message": "Welcome to the Med-Seg-AI API!"}
 
