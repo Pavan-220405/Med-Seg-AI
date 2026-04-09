@@ -4,6 +4,7 @@ from uuid import UUID
 from datetime import datetime
 
 
+# __________________Schemas for ML Models________________________________________________________________________________________________
 class ModelBase(BaseModel):
     model_name: str = Field(..., example="unet_brain_seg")
     version: str = Field(..., example="v1")
@@ -21,3 +22,13 @@ class ModelResponse(ModelBase):
     created_at : datetime
     added_by : UUID
 
+
+
+# __________________Schemas for Predictions________________________________________________________________________________________________
+class PredictionCreate(BaseModel):
+    prediction_id : UUID
+    user_id  : UUID 
+    model_id : UUID 
+    input_path : str
+    mask_path : str
+    inference_time : float
