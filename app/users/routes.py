@@ -5,8 +5,9 @@ from asyncpg import Connection
 from app.users.schemas import UserSignup, UserLogin, UserResponse, UserToken, UserAdmin
 from app.users.crud import crud_authenticate_user, crud_create_user, crud_make_user_admin
 from app.auth.utils import create_access_token, create_refresh_token
-from app.auth.dependencies import access_token_bearer, refresh_token_bearer, get_conn, RoleChecker
+from app.auth.dependencies import refresh_token_bearer, get_conn, RoleChecker, access_token_bearer
 from app.db.redis_engine import add_jti_to_blocklist
+from app.ML_models.crud import crud_get_all_models
 
 
 auth_router = APIRouter()
@@ -94,3 +95,12 @@ async def make_admin(new_user_email : UserAdmin, conn : Connection = Depends(get
         return {"message":f"Made user {new_user_email.email} as admin successfully"}
     
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"User {new_user_email.email} doesn't exist")
+
+
+
+# ----------------------------
+# Get all active models
+# ----------------------------
+@auth_router.get("/",dependencies=[Depends(access_token_bearer)])
+async def get_all_models(conn : Connection = Depends(get_conn)):
+    return await crud_get_all_models(conn=conn)

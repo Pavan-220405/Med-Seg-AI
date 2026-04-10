@@ -87,3 +87,16 @@ async def crud_create_prediction(prediction_details : PredictionCreate, conn : C
         raise
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+    
+
+async def crud_get_all_models(conn : Connection):
+    query = """
+        SELECT *
+        FROM models
+        WHERE is_active IS TRUE;
+    """
+    try:
+        row = await conn.fetchrow(query)
+        return dict(row) if row else None 
+    except Exception as e:
+        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,detail=str(e))
