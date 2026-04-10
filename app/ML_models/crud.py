@@ -1,6 +1,7 @@
 from asyncpg import Connection, UniqueViolationError
 from fastapi import HTTPException, status
 from uuid import UUID
+import json
 
 from app.ML_models.schemas import ModelCreate, PredictionCreate
 
@@ -8,8 +9,8 @@ from app.ML_models.schemas import ModelCreate, PredictionCreate
 # __________________CRUD Operations for ML Models__________________________________________________________________
 async def crud_create_model(model_details : ModelCreate, conn : Connection):
     query = """
-        INSERT INTO models (model_name, version, description, framework, model_type, model_path,added_by)
-        VALUES ($1,$2,$3,$4,$5,$6,$7)
+        INSERT INTO models (model_name, version, description, framework, model_type, model_path,added_by,metrics)
+        VALUES ($1,$2,$3,$4,$5,$6,$7,$8)
         RETURNING *
     """
     try:
@@ -21,8 +22,13 @@ async def crud_create_model(model_details : ModelCreate, conn : Connection):
             model_details.framework,
             model_details.model_type,
             model_details.model_path,
-            model_details.added_by
+            model_details.added_by,
+            json.dumps(model_details.metrics) if model_details.metrics else None
         )
+        if row:
+            row = dict(row)
+            if row["metrics"]:
+                row["metrics"] = json.loads(row["metrics"])     
         return dict(row) if row else None
     except UniqueViolationError:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Model already exists")

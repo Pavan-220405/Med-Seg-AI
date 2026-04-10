@@ -29,7 +29,7 @@ MASK_DIR = BASE_DIR / "mask"
 INPUT_DIR.mkdir(parents=True, exist_ok=True)
 MASK_DIR.mkdir(parents=True, exist_ok=True)
 
-MODEL_ID = uuid.UUID("e3dbd1f8-cd03-4ee7-9307-43a067e733d6")        # Hard coded as of now, can be made dynamic later when we have multiple models and a model registry in place
+MODEL_ID = uuid.UUID("452b6223-f86f-4cb7-86b6-fcaed6162e09")        # Hard coded as of now, can be made dynamic later when we have multiple models and a model registry in place
 
 
 @segmentation_router.post("/predict")

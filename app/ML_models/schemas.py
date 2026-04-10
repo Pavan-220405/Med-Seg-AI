@@ -12,6 +12,7 @@ class ModelBase(BaseModel):
     framework: str = Field(..., example="pytorch")
     model_type: str = Field(..., example="segmentation")
     model_path: str = Field(..., example="models/unet_v1.pth")
+    metrics : Optional[dict] = Field(None, example={"dice_score": 0.85, "iou": 0.80})
 
 class ModelCreate(ModelBase):
     added_by : UUID = Field(..., example="123e4567-e89b-12d3-a456-426614174000")
